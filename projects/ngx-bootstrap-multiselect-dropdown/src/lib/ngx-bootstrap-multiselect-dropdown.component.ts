@@ -19,12 +19,12 @@ export const DROPDOWN_CONTROL_VALUE_ACCESSOR: any = {
       <span style="float: left">{{selectedText}}</span>
       
     </button>
-    <div *ngIf="isVisible" class="dropdown-menu" [ngClass]="innerSettings.dropdownClasses" aria-labelledby="triggerId" style="display: inline-block">
+    <div *ngIf="isVisible" class="dropdown-menu pointer" [ngClass]="innerSettings.dropdownClasses" aria-labelledby="triggerId" style="display: inline-block">
       <div class="dropdown-header" *ngIf="innerSettings.headerText">{{innerSettings.headerText}}</div>
       <div *ngIf="innerSettings.showSelectAllBtn || innerSettings.showDeselectAllBtn || innerSettings.enableFilter" class="dropdown-divider"></div>
       <div *ngIf="innerSettings.showSelectAllBtn && !innerSettings.selectionLimit" class="dropdown-item" (click)="onSelectAll()">{{innerSettings.selectAllBtnText}}</div>
       <div *ngIf="innerSettings.showDeselectAllBtn" class="dropdown-item" (click)="onDeselectAll()">{{innerSettings.deselectAllBtnText}}</div>
-      <div *ngIf="innerSettings.enableFilter" class="p-2"><input type="text" placeholder="Filter values" [value]="filterValue" (keyup)="onFilterSearch($event?.target?.value)" class="form-control form-control-sm" /></div>
+      <div *ngIf="innerSettings.enableFilter" class="p-2"><input autocomplete="off" list="autocompleteOff" type="text" placeholder="Filter values" [value]="filterValue" (keyup)="onFilterSearch($event?.target?.value)" class="form-control form-control-sm" /></div>
       <div class="dropdown-divider" *ngIf="innerSettings.showSelectAllBtn || innerSettings.showDeselectAllBtn || innerSettings.enableFilter"></div>
       <div [style.height]="innerSettings.dropdownHeight" style="overflow: auto" >
         <div *ngFor="let item of filteredItems; let i=index" (click)="onSelect(item)" class="dropdown-item" [ngClass]="{'active': isActive(item), 'disabled': disabled }">
@@ -34,7 +34,7 @@ export const DROPDOWN_CONTROL_VALUE_ACCESSOR: any = {
     </div>
   </div>
   `,
-  styles: [],
+  styles: ['.pointer > .dropdown-item { curson: pointer; }'],
   providers: [DROPDOWN_CONTROL_VALUE_ACCESSOR]
 })
 export class NgxBootstrapMultiselectDropdownComponent implements OnInit, ControlValueAccessor {

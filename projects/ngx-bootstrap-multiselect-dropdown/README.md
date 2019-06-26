@@ -1,24 +1,171 @@
 # NgxBootstrapMultiselectDropdown
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.1.
+<h4>Install</h4>
+<p>
+    npm install ngx-bootstrap-multiselect-dropdown
+</p>
+<br>
+<h4>Example</h4>
+<p>
+    Add "node_modules/bootstrap/dist/css/bootstrap.min.css" to angular.json styles. 
+</p>
+<h5>Register module</h5>
+<code>
+import { NgxBootstrapMultiselectDropdownModule } from 'ngx-bootstrap-multiselect-dropdown/ngx-bootstrap-multiselect-dropdown';<br><br>
 
-## Code scaffolding
+@NgModule({<br>
+  &emsp;declarations: [<br>
+    &emsp;&emsp;AppComponent<br>
+  &emsp;],<br>
+  &emsp;imports: [<br>
+    &emsp;&emsp;BrowserModule,<br>
+    &emsp;&emsp;<b>NgxBootstrapMultiselectDropdownModule</b>,<br>
+    &emsp;&emsp;FormsModule<br>
+  &emsp;],<br>
+  &emsp;providers: [],<br>
+  &emsp;bootstrap: [AppComponent]<br>
+})<br>
+export class AppModule { }<br>
+</code>
 
-Run `ng generate component component-name --project ngx-bootstrap-multiselect-dropdown` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ngx-bootstrap-multiselect-dropdown`.
-> Note: Don't forget to add `--project ngx-bootstrap-multiselect-dropdown` or else it will be added to the default project in your `angular.json` file. 
+<h5>Setup</h5>
+<code>
+this.dropdownList = [<br>
+&emsp;&emsp;{"idValue":1,"nameValue":"India"},<br>
+&emsp;&emsp;{"idValue":2,"nameValue":"Singapore"},<br>
+&emsp;&emsp;{"idValue":3,"nameValue":"Australia"},<br>
+&emsp;&emsp;{"idValue":4,"nameValue":"Canada"},<br>
+&emsp;&emsp;{"idValue":5,"nameValue":"South Korea"},<br>
+&emsp;&emsp;{"idValue":6,"nameValue":"Germany"},<br>
+&emsp;&emsp;{"idValue":7,"nameValue":"France"},<br>
+&emsp;&emsp;{"idValue":8,"nameValue":"Russia"},<br>
+&emsp;&emsp;{"idValue":9,"nameValue":"Italy"},<br>
+&emsp;&emsp;{"idValue":10,"nameValue":null}<br>
+];<br>
+<br>
+this.selectedItems = [];<br>
+<br>
+this.dropdownSettings = {<br>
+&emsp;&emsp;dataIdProperty: "idValue",<br>
+&emsp;&emsp;dataNameProperty: "nameValue",<br>
+&emsp;&emsp;headerText: "Test header",<br>
+&emsp;&emsp;noneSelectedBtnText: "All selected",<br>
+&emsp;&emsp;btnWidth: "200px",<br>
+&emsp;&emsp;dropdownHeight: "200px",<br>
+&emsp;&emsp;showDeselectAllBtn: true,<br>
+&emsp;&emsp;showSelectAllBtn: true,<br>
+&emsp;&emsp;deselectAllBtnText: 'Deselect',<br>
+&emsp;&emsp;selectAllBtnText: 'Select',<br>
+&emsp;&emsp;btnClasses: 'btn btn-primary btn-sm dropdown-toggle',<br>
+&emsp;&emsp;selectionLimit: 3,<br>
+&emsp;&emsp;enableFilter: true<br>
+};<br>
+<br>
+</code>
+<p>
+&lt;ngx-bootstrap-multiselect
+    name="selectedItems" 
+    [(ngModel)]="selectedItems" 
+    [items]="dropdownList" 
+    [settings]="dropdownSettings"&gt;
+&lt;/ngx-bootstrap-multiselect&gt;
+</p>
 
-## Build
-
-Run `ng build ngx-bootstrap-multiselect-dropdown` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Publishing
-
-After building your library with `ng build ngx-bootstrap-multiselect-dropdown`, go to the dist folder `cd dist/ngx-bootstrap-multiselect-dropdown` and run `npm publish`.
-
-## Running unit tests
-
-Run `ng test ngx-bootstrap-multiselect-dropdown` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+<br>
+<h4>Settings</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Property</th>
+            <th>Type</th>
+            <th>Default value</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>dropdownHeight</th>
+            <td>string</td>
+            <td>'auto'</td>
+            <td>Sets the height of the dropdown.</td>
+        </tr>
+        <tr>
+            <th>btnWidth</th>
+            <td>string</td>
+            <td>'auto'</td>
+            <td>Width of the dropdown toggle button.</td>
+        </tr>
+        <tr>
+            <th>noneSelectedBtnText</th>
+            <td>string</td>
+            <td>'None selected'</td>
+            <td>Button text when no dropdown items are selected</td>
+        </tr>
+        <tr>
+            <th>dataIdProperty</th>
+            <td>string</td>
+            <td>'id'</td>
+            <td>Name of 'ID' property belonging to dropdown items.</td>
+        </tr>
+        <tr>
+            <th>dataNameProperty</th>
+            <td>string</td>
+            <td>'name'</td>
+            <td>Name of 'Name' property belonging to dropdown items.</td>
+        </tr>
+        <tr>
+            <th>deselectAllBtnText</th>
+            <td>string</td>
+            <td>'Deselect all'</td>
+            <td>Text of deselect all button.</td>
+        </tr>
+        <tr>
+            <th>selectAllBtnText</th>
+            <td>string</td>
+            <td>'Select all'</td>
+            <td>Text of select all button.</td>
+        </tr>
+        <tr>
+            <th>enableFilter</th>
+            <td>boolean</td>
+            <td>false</td>
+            <td>Show dropdown item filter text input.</td>
+        </tr>
+        <tr>
+            <th>dropdownClasses</th>
+            <td>string</td>
+            <td>-</td>
+            <td>Additional CSS classes added to dropdown menu.</td>
+        </tr>
+        <tr>
+            <th>headerText</th>
+            <td>string</td>
+            <td>-</td>
+            <td>Text displayed at top of dropdown menu.</td>
+        </tr>
+        <tr>
+            <th>selectionLimit</th>
+            <td>number</td>
+            <td>-</td>
+            <td>Limit number of how many dropdown items can be selected.</td>
+        </tr>
+        <tr>
+            <th>showDeselectAllBtn</th>
+            <td>boolean</td>
+            <td>-</td>
+            <td>Show deselect all button on dropdown menu.</td>
+        </tr>
+        <tr>
+            <th>showSelectAllBtn</th>
+            <td>boolean</td>
+            <td>-</td>
+            <td>Show select all button on dropdown menu.</td>
+        </tr>
+        <tr>
+            <th>btnClasses</th>
+            <td>string</td>
+            <td>-</td>
+            <td>Additional CSS classes added to dropdown menu toggle button.</td>
+        </tr>
+    </tbody>
+</table>

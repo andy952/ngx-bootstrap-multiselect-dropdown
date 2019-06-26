@@ -56,17 +56,9 @@ export class AppComponent {
       {"idValue":9,"nameValue":"Italy"},
       {"idValue":10,"nameValue":null}
     ];
-    this.dropdownList2 = [
-      {"id":1,"name":"India"},
-      {"id":2,"name":"Singapore"},
-      {"id":3,"name":"Australia"}
-    ];
+
     this.selectedItems = [];
-    this.selectedItems2 = [
-      {"id":1,"name":"India"},
-      {"id":2,"name":"Singapore"},
-      {"id":3,"name":"Australia"}
-    ];
+
     this.dropdownSettings = {
       dataIdProperty: "idValue",
       dataNameProperty: "nameValue",
@@ -82,5 +74,18 @@ export class AppComponent {
       selectionLimit: 3,
       enableFilter: true
     };
+
+    this.dropdownList2 = [
+      {"id":1,"name":"India"},
+      {"id":2,"name":"Singapore"},
+      {"id":3,"name":"Australia"}
+    ];
+    
+    this.selectedItems2 = [
+      {"id":1,"name":"India"},
+      {"id":2,"name":"Singapore"},
+      {"id":3,"name":"Australia"}
+    ];
+    
   }
 }
