@@ -4,74 +4,77 @@
 <p>
     npm install ngx-bootstrap-multiselect-dropdown
 </p>
-<br>
+
 <h4>Example</h4>
 <p>
     Add "node_modules/bootstrap/dist/css/bootstrap.min.css" to angular.json styles. 
 </p>
-<h5>Register module</h5>
-<code>
-import { NgxBootstrapMultiselectDropdownModule } from 'ngx-bootstrap-multiselect-dropdown/ngx-bootstrap-multiselect-dropdown';<br><br>
 
-@NgModule({<br>
-  &emsp;declarations: [<br>
-    &emsp;&emsp;AppComponent<br>
-  &emsp;],<br>
-  &emsp;imports: [<br>
-    &emsp;&emsp;BrowserModule,<br>
-    &emsp;&emsp;<b>NgxBootstrapMultiselectDropdownModule</b>,<br>
-    &emsp;&emsp;FormsModule<br>
-  &emsp;],<br>
-  &emsp;providers: [],<br>
-  &emsp;bootstrap: [AppComponent]<br>
-})<br>
-export class AppModule { }<br>
-</code>
+```
+//Import and register module
+import { NgxBootstrapMultiselectDropdownModule } from 'ngx-bootstrap-multiselect-dropdown';
 
-<h5>Setup</h5>
-<code>
-this.dropdownList = [<br>
-&emsp;&emsp;{"idValue":1,"nameValue":"India"},<br>
-&emsp;&emsp;{"idValue":2,"nameValue":"Singapore"},<br>
-&emsp;&emsp;{"idValue":3,"nameValue":"Australia"},<br>
-&emsp;&emsp;{"idValue":4,"nameValue":"Canada"},<br>
-&emsp;&emsp;{"idValue":5,"nameValue":"South Korea"},<br>
-&emsp;&emsp;{"idValue":6,"nameValue":"Germany"},<br>
-&emsp;&emsp;{"idValue":7,"nameValue":"France"},<br>
-&emsp;&emsp;{"idValue":8,"nameValue":"Russia"},<br>
-&emsp;&emsp;{"idValue":9,"nameValue":"Italy"},<br>
-&emsp;&emsp;{"idValue":10,"nameValue":null}<br>
-];<br>
-<br>
-this.selectedItems = [];<br>
-<br>
-this.dropdownSettings = {<br>
-&emsp;&emsp;dataIdProperty: "idValue",<br>
-&emsp;&emsp;dataNameProperty: "nameValue",<br>
-&emsp;&emsp;headerText: "Test header",<br>
-&emsp;&emsp;noneSelectedBtnText: "All selected",<br>
-&emsp;&emsp;btnWidth: "200px",<br>
-&emsp;&emsp;dropdownHeight: "200px",<br>
-&emsp;&emsp;showDeselectAllBtn: true,<br>
-&emsp;&emsp;showSelectAllBtn: true,<br>
-&emsp;&emsp;deselectAllBtnText: 'Deselect',<br>
-&emsp;&emsp;selectAllBtnText: 'Select',<br>
-&emsp;&emsp;btnClasses: 'btn btn-primary btn-sm dropdown-toggle',<br>
-&emsp;&emsp;selectionLimit: 3,<br>
-&emsp;&emsp;enableFilter: true<br>
-};<br>
-<br>
-</code>
-<p>
-&lt;ngx-bootstrap-multiselect
+@NgModule({
+    declarations: [
+        AppComponent
+    ],
+    imports: [
+        BrowserModule,
+        NgxBootstrapMultiselectDropdownModule,
+        FormsModule
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+
+//Example dropdown items
+this.dropdownList = [
+    {"idValue":1,"nameValue":"India"},
+    {"idValue":2,"nameValue":"Singapore"},
+    {"idValue":3,"nameValue":"Australia"},
+    {"idValue":4,"nameValue":"Canada"},
+    {"idValue":5,"nameValue":"South Korea"},
+    {"idValue":6,"nameValue":"Germany"},
+    {"idValue":7,"nameValue":"France"},
+    {"idValue":8,"nameValue":"Russia"},
+    {"idValue":9,"nameValue":"Italy"},
+    {"idValue":10,"nameValue":null}
+];
+
+//model
+this.selectedItems = [];
+
+
+//Example settings
+this.dropdownSettings = {
+    dataIdProperty: "idValue",
+    dataNameProperty: "nameValue",
+    headerText: "Test header",
+    noneSelectedBtnText: "All selected",
+    btnWidth: "200px",
+    dropdownHeight: "200px",
+    showDeselectAllBtn: true,
+    showSelectAllBtn: true,
+    deselectAllBtnText: 'Deselect',
+    selectAllBtnText: 'Select',
+    btnClasses: 'btn btn-primary btn-sm dropdown-toggle',
+    selectionLimit: 3,
+    enableFilter: true
+};
+
+
+//Html
+<ngx-bootstrap-multiselect
     name="selectedItems" 
     [(ngModel)]="selectedItems" 
     [items]="dropdownList" 
-    [settings]="dropdownSettings"&gt;
-&lt;/ngx-bootstrap-multiselect&gt;
-</p>
+    [settings]="dropdownSettings">
+</ngx-bootstrap-multiselect>
+```
 
-<br>
+
 <h4>Settings</h4>
 <table class="table">
     <thead>
