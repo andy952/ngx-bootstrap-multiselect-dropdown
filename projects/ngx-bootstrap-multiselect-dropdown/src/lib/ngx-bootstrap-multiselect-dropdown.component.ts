@@ -21,7 +21,6 @@ export const DROPDOWN_CONTROL_VALUE_ACCESSOR: any = {
     </button>
     <div *ngIf="isVisible" class="dropdown-menu pointer" [ngClass]="innerSettings.dropdownClasses" aria-labelledby="triggerId" style="display: inline-block">
       <div class="dropdown-header" *ngIf="innerSettings.headerText">{{innerSettings.headerText}}</div>
-      <div *ngIf="innerSettings.showSelectAllBtn || innerSettings.showDeselectAllBtn || innerSettings.enableFilter" class="dropdown-divider"></div>
       <div *ngIf="innerSettings.showSelectAllBtn && !innerSettings.selectionLimit" class="dropdown-item" (click)="onSelectAll()">{{innerSettings.selectAllBtnText}}</div>
       <div *ngIf="innerSettings.showDeselectAllBtn" class="dropdown-item" (click)="onDeselectAll()">{{innerSettings.deselectAllBtnText}}</div>
       <div *ngIf="innerSettings.enableFilter" class="p-2"><input autocomplete="off" list="autocompleteOff" type="text" placeholder="Filter values" [value]="filterValue" (keyup)="onFilterSearch($event?.target?.value)" class="form-control form-control-sm" /></div>
@@ -62,7 +61,7 @@ export class NgxBootstrapMultiselectDropdownComponent implements OnInit, Control
   }
 
   // Return selected items by filtering items array based on values in selectedItems array
-  getSelectedItems() {   
+  getSelectedItems() { 
     this.setSelectedText();
     return this.items
       .filter(_ => this.selectedItems.findIndex(x => x === _[this.innerSettings.dataIdProperty]) > -1) // Return only items with id values in selectedItems
@@ -102,7 +101,7 @@ export class NgxBootstrapMultiselectDropdownComponent implements OnInit, Control
 
     this.onTouched();
     this.selectedItems = this.items.map(_ => _[this.innerSettings.dataIdProperty]);
-    this.writeValue([]);    
+    this.writeValue(this.selectedItems);    
     this.onDataSelect.emit();
   }
 
@@ -131,20 +130,25 @@ export class NgxBootstrapMultiselectDropdownComponent implements OnInit, Control
     if(selectedObject) {   
       const tempArray = Array.isArray(selectedObject) ? selectedObject as any[] : [selectedObject];
 
-      this.items = this.items.map(_ => {
-        var index = tempArray.findIndex(x => _[this.innerSettings.dataIdProperty] === x[this.innerSettings.dataIdProperty]);
-        if(index > -1) { 
-          const index = this.selectedItems.findIndex(x => x === _[this.innerSettings.dataIdProperty]);
-          if(index > -1) { this.selectedItems.splice(index, 1); }
-          else {
-            if(!this.isSelectionLimitReached()) {
-              this.selectedItems.push(_[this.innerSettings.dataIdProperty]); 
-            }  
+      if(tempArray.length === 0) {
+        this.selectedItems = [];
+      }
+      else {
+        this.items = this.items.map(_ => {
+          var index = tempArray.findIndex(x => _[this.innerSettings.dataIdProperty] === x[this.innerSettings.dataIdProperty]);
+          if(index > -1) { 
+            const index = this.selectedItems.findIndex(x => x === _[this.innerSettings.dataIdProperty]);
+            if(index > -1) { this.selectedItems.splice(index, 1); }
+            else {
+              if(!this.isSelectionLimitReached()) {
+                this.selectedItems.push(_[this.innerSettings.dataIdProperty]); 
+              }  
+            }
           }
-        }
-
-        return _;
-      }).slice();     
+  
+          return _;
+        }).slice();     
+      }     
     }
     this.onChange(this.getSelectedItems());
   }
@@ -153,6 +157,7 @@ export class NgxBootstrapMultiselectDropdownComponent implements OnInit, Control
     this.innerSettings = new DropdownSettings(this.settings); // Set initial setting values
     this.filteredItems = this.items; // Set initial filtered values
     this.setSelectedText(); // Set initial button text
+    console.log(this);
   }
 
   // ControlValueAccessor methods
