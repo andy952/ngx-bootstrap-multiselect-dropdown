@@ -41,6 +41,7 @@ export class NgxBootstrapMultiselectDropdownComponent implements OnInit, Control
   @Input() public items: any[] = [];
   @Input() public settings: any;
   @Output() onDataSelect: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onDataOperationSelect: EventEmitter<any> = new EventEmitter<any>();
   @Output() onSelectAllData = new EventEmitter();
   @Output() onDeselectAllData = new EventEmitter();
   public innerSettings: DropdownSettings;
@@ -92,7 +93,7 @@ export class NgxBootstrapMultiselectDropdownComponent implements OnInit, Control
 
     this.onTouched();
     this.writeValue(selectedObject);    
-    this.onSelectAllData.emit(selectedObject);
+    this.onDataSelect.emit(selectedObject);
   }
 
   // Set all dropdown items as active. Activated on select all button item click
@@ -102,7 +103,7 @@ export class NgxBootstrapMultiselectDropdownComponent implements OnInit, Control
     this.onTouched();
     this.selectedItems = this.items.map(_ => _[this.innerSettings.dataIdProperty]);
     this.writeValue(this.selectedItems);    
-    this.onDataSelect.emit();
+    this.onSelectAllData.emit();
   }
 
   // Remove active from all dropdown items. Activated on deselect all button item click
@@ -129,7 +130,7 @@ export class NgxBootstrapMultiselectDropdownComponent implements OnInit, Control
   writeValue(selectedObject: any) {   
     if(selectedObject) {   
       const tempArray = Array.isArray(selectedObject) ? selectedObject as any[] : [selectedObject];
-
+      const beforeLength = this.selectedItems.length;
       if(tempArray.length === 0) {
         this.selectedItems = [];
       }
@@ -138,8 +139,9 @@ export class NgxBootstrapMultiselectDropdownComponent implements OnInit, Control
           var index = tempArray.findIndex(x => _[this.innerSettings.dataIdProperty] === x[this.innerSettings.dataIdProperty]);
           if(index > -1) { 
             const index = this.selectedItems.findIndex(x => x === _[this.innerSettings.dataIdProperty]);
-            if(index > -1) { this.selectedItems.splice(index, 1); }
-            else {
+            if(index > -1) { 
+              this.selectedItems.splice(index, 1); 
+            } else {
               if(!this.isSelectionLimitReached()) {
                 this.selectedItems.push(_[this.innerSettings.dataIdProperty]); 
               }  
@@ -148,7 +150,13 @@ export class NgxBootstrapMultiselectDropdownComponent implements OnInit, Control
   
           return _;
         }).slice();     
-      }     
+      }  
+      const afterLength = this.selectedItems.length;
+      if (afterLength > beforeLength) {
+        this.onDataOperationSelect.emit({ operation: "added", item: selectedObject, selectedCount: this.selectedItems.length });
+      } else if (afterLength < beforeLength) {
+        this.onDataOperationSelect.emit({ operation: "removed", item: selectedObject, selectedCount: this.selectedItems.length });
+      }
     }
     this.onChange(this.getSelectedItems());
   }
@@ -157,7 +165,6 @@ export class NgxBootstrapMultiselectDropdownComponent implements OnInit, Control
     this.innerSettings = new DropdownSettings(this.settings); // Set initial setting values
     this.filteredItems = this.items; // Set initial filtered values
     this.setSelectedText(); // Set initial button text
-    console.log(this);
   }
 
   // ControlValueAccessor methods

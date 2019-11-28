@@ -1,6 +1,6 @@
 {
   "name": "ngx-bootstrap-multiselect-dropdown",
-  "version": "1.0.7",
+  "version": "1.0.9",
   "author": "mihste84",
   "repository": { "type": "git", "url": "https://github.com/mihste84/ngx-bootstrap-multiselect-dropdown" },
   "description": "Simple multiselect dropdown based on bootstrap 4 dropdown component.",

@@ -29,6 +29,10 @@ export class AppComponent {
     this.model = new TestModel();
   }
 
+  onSelectedOperation(data: any) {
+    console.log(data);
+  }
+
   ngOnInit(){
     this.dropdownList = [
       {"idValue":1,"nameValue":"India"},

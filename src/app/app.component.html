@@ -3,7 +3,7 @@
         <div class="form-group row">
             <label class="col-6">Test 1</label>
             <div class="col-6">
-                <ngx-bootstrap-multiselect required name="selectedItems" [(ngModel)]="model.data" [items]="dropdownList" [settings]="dropdownSettings"></ngx-bootstrap-multiselect>
+                <ngx-bootstrap-multiselect (onDataOperationSelect)="onSelectedOperation($event)" required name="selectedItems" [(ngModel)]="model.data" [items]="dropdownList" [settings]="dropdownSettings"></ngx-bootstrap-multiselect>
 
             </div>
         </div>
