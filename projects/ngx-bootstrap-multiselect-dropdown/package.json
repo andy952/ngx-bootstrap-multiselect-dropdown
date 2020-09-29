@@ -6,7 +6,7 @@
   "description": "Simple multiselect dropdown based on bootstrap 4 dropdown component.",
   "keywords": ["bootstrap", "angular", "multiselect", "dropdown"],
   "peerDependencies": {
-    "@angular/common": "^7.0.0",
-    "@angular/core": "^7.0.0"
+    "@angular/common": "^10.0.0",
+    "@angular/core": "^10.0.0"
   }
 }
