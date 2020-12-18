@@ -33,7 +33,7 @@ export const DROPDOWN_CONTROL_VALUE_ACCESSOR: any = {
     </div>
   </div>
   `,
-  styles: ['.pointer > .dropdown-item { curson: pointer; }'],
+  styles: ['.dropdown-item { cursor: pointer; }'],
   providers: [DROPDOWN_CONTROL_VALUE_ACCESSOR]
 })
 export class NgxBootstrapMultiselectDropdownComponent implements OnInit, ControlValueAccessor {
@@ -83,8 +83,15 @@ export class NgxBootstrapMultiselectDropdownComponent implements OnInit, Control
 
   // Filter items based on item name property value
   onFilterSearch(value: string) {
+    let searchValue = value;
+    if(!this.innerSettings.caseSensitiveFilter) {
+      searchValue = value.toLowerCase();
+    } 
+
     this.filterValue = value; // Save filter value so it appears when toggling dropdown
-    this.filteredItems = this.items.filter(_ => _[this.innerSettings.dataNameProperty] && _[this.innerSettings.dataNameProperty].toLowerCase().startsWith(value));
+    this.filteredItems = this.items.filter(_ => _[this.innerSettings.dataNameProperty] && 
+      (this.innerSettings.caseSensitiveFilter ? _[this.innerSettings.dataNameProperty] : 
+        _[this.innerSettings.dataNameProperty].toLowerCase()).startsWith(searchValue));
   }
 
   // Set selected dropdown item as active. Activated on dropdown item click
@@ -121,7 +128,7 @@ export class NgxBootstrapMultiselectDropdownComponent implements OnInit, Control
     return this.innerSettings.selectionLimit && this.innerSettings.selectionLimit <= this.selectedItems.length;
   }
 
-  // Check if drowdown item is active
+  // Check if dropdown item is active
   isActive(item: any) {
     return this.selectedItems.findIndex(x => x === item[this.innerSettings.dataIdProperty]) > -1;
   }

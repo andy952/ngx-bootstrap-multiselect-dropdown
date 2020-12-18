@@ -7,6 +7,7 @@ export class DropdownSettings {
     dataNameProperty = 'name';
     deselectAllBtnText = 'Deselect all';
     enableFilter = false;
+    caseSensitiveFilter = false;
     selectAllBtnText = 'Select all';
     dropdownClasses: string = null;
     headerText: string = null;
@@ -22,6 +23,7 @@ export class DropdownSettings {
         this.dataNameProperty = settings.dataNameProperty || this.dataNameProperty;
         this.deselectAllBtnText = settings.deselectAllBtnText || this.deselectAllBtnText;
         this.enableFilter = settings.enableFilter;
+        this.caseSensitiveFilter = settings.caseSensitiveFilter;
         this.selectAllBtnText = settings.selectAllBtnText || this.selectAllBtnText;8
         this.dropdownClasses = settings.dropdownClasses;
         this.headerText = settings.headerText;
